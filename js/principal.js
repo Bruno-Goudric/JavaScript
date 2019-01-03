@@ -28,17 +28,20 @@ var tdImc = paciente.querySelector(".info-imc");
 var pesoEhValido = true; // assumindo de boa fé que o peso é válido
 var alturaEhValida = true; // assumindo de boa fé que a altura é válida
 
+//classList.add propriedade para adicionar classes do Css
 
 if(peso <= 0 || peso >= 1000){
 	console.log("Peso Invalido!");
 	pesoEhValido = false;
 	tdPeso.textContent = "Peso Inválido!";
+	paciente.classList.add("paciente-invalido");
 }
 
 if(altura <= 0 || altura >= 3.00){
 	console.log("Altura Invalida!");
 	alturaEhValida = false
 	tdAltura.textContent = "Altura Inválida!";
+	paciente.classList.add("paciente-invalido");
 }
 
 //toFixed utilizado para definir a quantidade de numeros após a virgula
