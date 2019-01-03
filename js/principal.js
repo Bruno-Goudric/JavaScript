@@ -6,9 +6,16 @@ titulo.textContent = "Aparecida Nutricionista";
 
 // Calculando o IMC
 
-var paciente = document.querySelector("#primeiro-paciente");
+//querySelectorAll - pega o valor de todos os pacientes
 
-var tdPeso = paciente.querySelector(".info-peso");
+var pacientes = document.querySelectorAll(".paciente");
+
+//Defini o calculo do IMC para todos os pacientes
+
+for(var i = 0; i < pacientes.length; i++){
+
+	var paciente = pacientes[i];
+	var tdPeso = paciente.querySelector(".info-peso");
 var peso = tdPeso.textContent;
 
 var tdAltura = paciente.querySelector(".info-altura");
@@ -34,12 +41,18 @@ if(altura <= 0 || altura >= 3.00){
 	tdAltura.textContent = "Altura Inválida!";
 }
 
+//toFixed utilizado para definir a quantidade de numeros após a virgula
+ 
 if(pesoEhValido && alturaEhValida){
 	var imc = peso / (altura * altura); 
-	tdImc.textContent = imc;
+	tdImc.textContent = imc.toFixed(2);
 } else {
     tdImc.textContent = "Altura e/ou peso inválidos!"
 }
+
+}
+
+
 
 
 
