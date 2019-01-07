@@ -1,62 +1,74 @@
-
-// Alterado o Titulo da tag h1 com uma classe
 var titulo = document.querySelector(".titulo");
-
 titulo.textContent = "Aparecida Nutricionista";
-
-// Calculando o IMC
-
-//querySelectorAll - pega o valor de todos os pacientes
 
 var pacientes = document.querySelectorAll(".paciente");
 
-//Defini o calculo do IMC para todos os pacientes
+for (var i = 0; i < pacientes.length; i++) {
 
-for(var i = 0; i < pacientes.length; i++){
+    var paciente = pacientes[i];
 
-	var paciente = pacientes[i];
-	var tdPeso = paciente.querySelector(".info-peso");
-var peso = tdPeso.textContent;
+    var tdPeso = paciente.querySelector(".info-peso");
+    var peso = tdPeso.textContent;
 
-var tdAltura = paciente.querySelector(".info-altura");
-var altura = tdAltura.textContent;
+    var tdAltura = paciente.querySelector(".info-altura");
+    var altura = tdAltura.textContent;
 
-var tdImc = paciente.querySelector(".info-imc");
+    var tdImc = paciente.querySelector(".info-imc");
 
-//validação para executar calculo do imc
+    var pesoEhValido = true;
+    var alturaEhValida = true;
 
-var pesoEhValido = true; // assumindo de boa fé que o peso é válido
-var alturaEhValida = true; // assumindo de boa fé que a altura é válida
+    if (peso <= 0 || peso >= 1000) {
+        console.log("Peso inválido!");
+        pesoEhValido = false;
+        tdImc.textContent = "Peso inválido";
+        paciente.classList.add("paciente-invalido");
+    }
 
-//classList.add propriedade para adicionar classes do Css
+    if (altura <= 0 || altura >= 3.00) {
+        console.log("Altura inválida!");
+        alturaEhValida = false;
+        tdImc.textContent = "Altura inválida";
+        paciente.classList.add("paciente-invalido");
+    }
 
-if(peso <= 0 || peso >= 1000){
-	console.log("Peso Invalido!");
-	pesoEhValido = false;
-	tdPeso.textContent = "Peso Inválido!";
-	paciente.classList.add("paciente-invalido");
+    if (pesoEhValido && alturaEhValida) {
+        var imc = peso / (altura * altura);
+        tdImc.textContent = imc.toFixed(2);
+    }
 }
 
-if(altura <= 0 || altura >= 3.00){
-	console.log("Altura Invalida!");
-	alturaEhValida = false
-	tdAltura.textContent = "Altura Inválida!";
-	paciente.classList.add("paciente-invalido");
-}
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
+botaoAdicionar.addEventListener("click", function(event) {
+    event.preventDefault();
 
-//toFixed utilizado para definir a quantidade de numeros após a virgula
- 
-if(pesoEhValido && alturaEhValida){
-	var imc = peso / (altura * altura); 
-	tdImc.textContent = imc.toFixed(2);
-} else {
-    tdImc.textContent = "Altura e/ou peso inválidos!"
-}
+    var form = document.querySelector("#form-adiciona");
 
-}
+    var nome = form.nome.value;
+    var peso = form.peso.value;
+    var altura = form.altura.value;
+    var gordura = form.gordura.value;
 
+    var pacienteTr = document.createElement("tr");
 
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
 
+    nomeTd.textContent = nome;
+    pesoTd.textContent = peso;
+    alturaTd.textContent = altura;
+    gorduraTd.textContent = gordura;
 
+    pacienteTr.appendChild(nomeTd);
+    pacienteTr.appendChild(pesoTd);
+    pacienteTr.appendChild(alturaTd);
+    pacienteTr.appendChild(gorduraTd);
 
+    var tabela = document.querySelector("#tabela-pacientes");
 
+    tabela.appendChild(pacienteTr);
+
+});
