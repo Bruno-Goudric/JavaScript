@@ -151,5 +151,9 @@ button[disabled=disabled], button:disabled {
 	height: 35px;
 	margin-bottom: 10px;
 	border-radius: 7px;
-	
+
+}
+
+.invisivel{
+	display:none;
 }
